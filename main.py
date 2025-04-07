@@ -4,7 +4,7 @@ import urequests
 from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api
 from EPD_2in66_B_V4_Portrait import EPD_2in66_B_V4_Landscape
 from mfont import mfont
-from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN,GOOGLE_CALENDAR_ID
+from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALENDAR_ID, get_google_refresh_token
 
 if __name__=='__main__':
     
@@ -21,7 +21,7 @@ if __name__=='__main__':
         # print(ymd)
 
         # カレンダー取得
-        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN)
+        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
 
         # 画面表示
         epd = EPD_2in66_B_V4_Landscape()
@@ -33,8 +33,8 @@ if __name__=='__main__':
         mf = mfont()
         mf.setFontSize(16)    
         
-        # deepsleep 1時間
-        sleep_msec = 3600000
+        # deepsleep 2時間
+        sleep_msec = 7200000
         if access_token is None:
             # deepsleep 24時間
             sleep_msec = 86400000
